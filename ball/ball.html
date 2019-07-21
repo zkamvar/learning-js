@@ -1,22 +1,38 @@
 <script>
+  // From https://www.webfx.com/blog/web-design/bouncing-a-ball-around-with-html5-and-javascript/
   var context;
   var x = 100;
-  var y = 200;
+  var y = 100;
+  var xmax = 300;
+  var ymax = 300;
   var dx = 5;
   var dy = 5;
   function init()
   {
     context = myCanvas.getContext('2d');
+    setInterval(draw, 10);
+  }
+  function draw()
+  {
+    context.clearRect(0, 0, xmax, ymax);
     context.beginPath();
     context.fillStyle="#ff9999";
     // Draws a circle of radius 20 at coords 100,100 on the canvas
-    context.arc(100, 100, 20, 0, Math.PI * 2, true);
+    context.arc(x, y, 20, 0, Math.PI * 2, true);
     context.closePath();
     context.fill();
+    if (x < 0 || x > xmax) {
+      x -= dx;
+    }
+    if (y < 0 || y > ymax) {
+      y -= dy;
+    }
+    x += dx;
+    y += dy;
   }
 </script>
 
 <body onLoad="init()">
-  <canvas id="myCanvas" width="500" height="400">
+  <canvas id="myCanvas" width="300" height="300">
   </canvas>
 </body>
