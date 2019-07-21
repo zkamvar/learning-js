@@ -2,18 +2,20 @@
   // From https://www.webfx.com/blog/web-design/bouncing-a-ball-around-with-html5-and-javascript/
   var context;
   var x = 100;
-  var y = 100;
+  var y = 200;
   var xmax = 300;
   var ymax = 300;
   var dx = 5;
   var dy = 5;
+  var r = 0.5;
   function init()
   {
     context = myCanvas.getContext('2d');
-    setInterval(draw, 10);
+    setInterval(draw, 20);
   }
   function draw()
   {
+    r = Math.random();
     context.clearRect(0, 0, xmax, ymax);
     context.beginPath();
     context.fillStyle="#ff9999";
@@ -22,13 +24,18 @@
     context.closePath();
     context.fill();
     if (x < 0 || x > xmax) {
-      x -= dx;
+      dx = -dx - Math.random();
+    } else {
+      dx = dx + Math.random();
     }
     if (y < 0 || y > ymax) {
-      y -= dy;
+      dy = -dy - Math.random();
+    } else {
+      dy = dy + Math.random();
     }
     x += dx;
-    y += dy;
+    y += dy; 
+    console.log(y);
   }
 </script>
 
